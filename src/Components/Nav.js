@@ -31,6 +31,13 @@ function DrawerAppBar(props) {
     }
   }
 
+  function wishClickHandler() {
+    if (props.isLoggedIn === true) navigate("/watchlist");
+    else {
+      toast.error("Please Log In");
+    }
+  }
+
   function profileClickHandler() {
     if (props.isLoggedIn === true) navigate("/userProfile");
     else {
@@ -54,6 +61,12 @@ function DrawerAppBar(props) {
         <ListItem disablePadding>
           <ListItemButton onClick={dashClickHandler} sx={{ textAlign: "center" }}>
             <ListItemText primary={"DashBoard"} />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton onClick={wishClickHandler} sx={{ textAlign: "center" }}>
+            <ListItemText primary={"WatchList"} />
           </ListItemButton>
         </ListItem>
 
@@ -107,6 +120,11 @@ function DrawerAppBar(props) {
             >
               DashBoard
             </Button>
+
+            <Button onClick={wishClickHandler} sx={{ color: "#fff" }}>
+              WatchList
+            </Button>
+
             <Button onClick={profileClickHandler} sx={{ color: "#fff" }}>
               Profile
             </Button>

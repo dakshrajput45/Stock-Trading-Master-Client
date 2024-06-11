@@ -93,7 +93,7 @@ function UserProfile({ isLoggedIn }) {
                             <div>
                                 <div className="border bg-white p-[30px] w-full rounded-md shadow-md mt-[20px] lg:mt-[0px]">
                                     <p className="w-full p-1 uppercase text-center font-bold text-xl mb-5 rounded-md ">Wallet</p>
-                                    <div className="flex flex-row  mt-[40px]">
+                                    <div className="flex flex-row  mt-[20px] mb-[20px]">
                                         <p className="text-[20px]">Balance:</p>
                                         <p className="text-[20px]">$ {balance.toFixed(3)}</p>
                                     </div>

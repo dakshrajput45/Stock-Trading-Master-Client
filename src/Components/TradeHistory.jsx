@@ -37,7 +37,7 @@ function TradeHistory({ userData }) {
                                     Time
                                 </th>
                                 <th scope="col" className="px-6 py-3  text-black">
-                                    Total Income
+                                    Total Expanse
                                 </th>
                             </tr>
                         </thead>

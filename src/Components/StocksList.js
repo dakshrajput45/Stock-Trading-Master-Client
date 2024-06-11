@@ -85,6 +85,7 @@ function StocksList({ stocks }) {
                                     <td className="px-6 py-4 bg-gray-800 text-white cursor-pointer">
                                         <button
                                             onClick={() => openModal(rowData)}
+                                            className="border border-white rounded-md px-[10px] py-[2px]"
                                         >
                                             Sell
                                         </button>

@@ -9,6 +9,7 @@ import "./CSS/App.css"
 import UserProfile from "./Pages/UserProfile";
 import { useCookies } from "react-cookie";
 import LandingPage from "./Pages/LandingPage";
+import WatchList from "./Pages/WatchList";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/login" element={<LogIn setIsLoggedIn={setIsLoggedIn}/>}/>
             <Route path="/signup" element={<SignUp setIsLoggedIn={setIsLoggedIn}/>}/>
             <Route path="/userProfile" element={<UserProfile isLoggedIn={isLoggedIn} />}/>
+            <Route path="/watchlist" element={<WatchList/>}/>
           </Routes>
         </div>
     </div>

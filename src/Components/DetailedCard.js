@@ -11,7 +11,7 @@ function DetailedCard({ isLoggedIn }) {
     const [cookies, setCookie, removeCookie] = useCookies();
     const userId = cookies.userId;
     const navigate = useNavigate();
-    const { selectedStock, getUserData} = useContext(AppContext);
+    const { selectedStock, getUserData } = useContext(AppContext);
     const [quantity, setQuantity] = useState("");
     const [loading, setLoading] = useState(true);
     const [stockData, setStockData] = useState({});
@@ -25,7 +25,7 @@ function DetailedCard({ isLoggedIn }) {
         setQuantity(value);
     }
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
-    //const url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo";
+   // const url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo";
     const API_KEY = process.env.REACT_APP_API_KEY;
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${selectedStock}&interval=5min&apikey=${API_KEY}`;
 
@@ -101,6 +101,22 @@ function DetailedCard({ isLoggedIn }) {
             }
         }
     }
+    const wishHandler = async (symbol) => {
+        try {
+            console.log(symbol);
+            const response = await axios.post(`${backendUrl}/addtolist`, {
+                userId: userId,
+                symbol
+            });
+            if (response.status === 200) {
+                toast.success("Added to Wishlist");
+            } else {
+                toast.error("Try Again");
+            }
+        } catch (error) {
+            toast.error("Something Went Wrong");
+        }
+    };
     return (
         <div className="flex items-center justify-center my-[30px]">
             {
@@ -142,18 +158,21 @@ function DetailedCard({ isLoggedIn }) {
                                     <button className="w-full mt-[20px] border border-gray-800 p-[5px] rounded-md px-[10px] bg-[green] text-[white] hover:text-[black] hover:bg-[white]" onClick={buyHandler}>Buy</button>
                                 </div>
 
-                                <div className=" flex flex-row justify-between pb-[20px] mt-[30px] lg:mt-[70px] bg-white p-[30px] rounded-md shadow-md">
-                                    <div >
-                                        <label><p>change_percentage<sup>*</sup></p></label>
-                                        <p className="mb-[20px]">{changePercentage ? changePercentage.toFixed(2) : 'N/A'}%</p>
+                                <div className=" flex flex-col pb-[20px] mt-[30px] lg:mt-[70px] bg-white p-[30px] rounded-md shadow-md">
+                                    <div className="flex flex-row justify-between gap-[15px]">
+                                        <div>
+                                            <label><p>change percentage<sup>*</sup></p></label>
+                                            <p className="mb-[20px]">{changePercentage ? changePercentage.toFixed(2) : 'N/A'}%</p></div>
 
-                                        <label><p>change_amount<sup>*</sup></p></label>
-                                        <p>{changePrice ? changePrice.toFixed(4) : 'N/A'}</p>
+                                        <div>
+                                            <label><p>change amount<sup>*</sup></p></label>
+                                            <p>{changePrice ? changePrice.toFixed(4) : 'N/A'}</p></div>
                                     </div>
                                     <div className="">
                                         <label><p>price<sup>*</sup></p></label>
                                         <p>{closePrice ? closePrice.toFixed(4) : 'N/A'}</p>
                                     </div>
+                                    <button className="w-full mt-[20px] border border-gray-800 p-[5px] rounded-md px-[10px] bg-[green] text-[white] hover:text-[black] hover:bg-[white]" onClick={()=>wishHandler(selectedStock)}>Add to WatchList</button>
                                 </div>
                             </div>
                         </div>
