@@ -116,7 +116,7 @@ function DetailedCard({ isLoggedIn }) {
                         <div className="flex flex-col lg:flex-row justify-between w-full h-max gap-[50px]">
                             <div className="flex flex-col w-[full] lg:w-[70%] bg-white lg:mt-[50px] rounded-md shadow-md">
                                 <div className="font-bold text-[30px] underline flex flex-row justify-between mb-[10px] mt-[20px] px-[10px]">
-                                    <h1>{"IBM"}</h1>
+                                    <h1>{selectedStock}</h1>
                                 </div>
                                 <div className="w-[95%]">
                                     <LiveChart stockData={stockData} />
