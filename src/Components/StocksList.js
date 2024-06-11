@@ -4,8 +4,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 function StocksList({ stocks }) {
-    
+
     const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const API_KEY = process.env.REACT_APP_API_KEY;
     const [cookies] = useCookies();
     const userId = cookies.userId;
 
@@ -17,16 +18,26 @@ function StocksList({ stocks }) {
         try {
             const now = new Date();
             const formattedTimestamp = now.toLocaleString('en-GB', { hour12: false }).replace(',', '');
-            const { data } = await axios.put(`${backendUrl}/sell`, {
+            const dataurl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${ticker}&interval=5min&apikey=${API_KEY}`;
+
+            const { data } = await axios.get(dataurl);
+            const timeSeriesData = data["Time Series (5min)"];
+            const timeSeriesKeys = Object.keys(timeSeriesData);
+            const firstIndexKey = timeSeriesKeys[0];
+            const firstIndexObject = timeSeriesData[firstIndexKey];
+            const price = parseFloat(firstIndexObject["4. close"]);
+
+            const response = await axios.put(`${backendUrl}/sell`, {
                 userId: userId,
                 quantity: quantity,
                 ticker: ticker,
-                time:formattedTimestamp
+                time: formattedTimestamp,
+                price:price,
             });
-            console.log(data);
+            console.log(response);
             // Close the modal after successful sell
             setIsModalOpen(false);
-            setSellQuantity(""); 
+            setSellQuantity("");
             toast.success("Selled");
         } catch (e) {
             console.log(e.response.data.msg);
