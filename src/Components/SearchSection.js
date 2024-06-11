@@ -1,12 +1,10 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 
 function SearchSection() {
 
     const [searchBox,setSearchBox] = useState({searchBox:""})
-    const {selectedStock,setSelectedStock} = useContext(AppContext);
-    const navigate = useNavigate();
+    const {setSelectedStock} = useContext(AppContext);
 
     function changeHandler(event) {
         setSearchBox((prevData) => ({
@@ -17,7 +15,6 @@ function SearchSection() {
 
     const SubmitHandler = async(event) => {
         event.preventDefault();
-        console.log(searchBox.searchBox);
         setSelectedStock(searchBox.searchBox);
     }
 

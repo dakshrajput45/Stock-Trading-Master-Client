@@ -6,7 +6,8 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 
 function LogIn({ setIsLoggedIn }) {
-  const url = "https://project-blend-server.onrender.com";
+  
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
@@ -22,7 +23,7 @@ function LogIn({ setIsLoggedIn }) {
     event.preventDefault();
     console.log(formData);
     try {
-      const response = await axios.post(`http://localhost:5000/login`, formData);
+      const response = await axios.post(`${backendUrl}/login`, formData);
       //console.log(response);
       if (response.status === 200) {
         setCookie("userId", response.data.data);

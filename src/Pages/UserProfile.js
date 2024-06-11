@@ -11,6 +11,8 @@ import axios from "axios";
 
 function UserProfile({ isLoggedIn }) {
 
+    
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const [cookies, setCookie, removeCookie] = useCookies();
     const userId = cookies.userId;
     const { getUserData } = useContext(AppContext);
@@ -52,7 +54,7 @@ function UserProfile({ isLoggedIn }) {
 
     async function addHandler() {
         try {
-            const { data } = await axios.put("http://localhost:5000/addbalance",
+            const { data } = await axios.put(`${backendUrl}/addbalance`,
                 {
                     userId: userId,
                     balance: quantity,

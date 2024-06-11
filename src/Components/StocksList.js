@@ -4,6 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 function StocksList({ stocks }) {
+    
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const [cookies] = useCookies();
     const userId = cookies.userId;
 
@@ -13,10 +15,13 @@ function StocksList({ stocks }) {
 
     async function sellHandler(quantity, ticker) {
         try {
-            const { data } = await axios.put("http://localhost:5000/sell", {
+            const now = new Date();
+            const formattedTimestamp = now.toLocaleString('en-GB', { hour12: false }).replace(',', '');
+            const { data } = await axios.put(`${backendUrl}/sell`, {
                 userId: userId,
                 quantity: quantity,
                 ticker: ticker,
+                time:formattedTimestamp
             });
             console.log(data);
             // Close the modal after successful sell

@@ -24,9 +24,10 @@ function DetailedCard({ isLoggedIn }) {
         const value = event.target.value;
         setQuantity(value);
     }
-    const url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo";
-    // const API_KEY = "05MO2GPVFW50ULMY";
-    // const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${selectedStock}&interval=5min&apikey=${API_KEY}`;
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    //const url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo";
+    const API_KEY = process.env.REACT_APP_API_KEY;
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${selectedStock}&interval=5min&apikey=${API_KEY}`;
 
     async function fetchStockData() {
         try {
@@ -81,7 +82,7 @@ function DetailedCard({ isLoggedIn }) {
                 const now = new Date();
                 const formattedTimestamp = now.toLocaleString('en-GB', { hour12: false }).replace(',', '');
                 if (quantity > 0) {
-                    const { data } = await axios.put(`http://localhost:5000/buy`, {
+                    const { data } = await axios.put(`${backendUrl}/buy`, {
                         userId: userId,
                         quantity: quantity,
                         price: closePrice,

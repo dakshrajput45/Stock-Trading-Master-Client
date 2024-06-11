@@ -7,6 +7,7 @@ export const AppContext = createContext();
 
 export function AppContextProvider({ children }) {
 
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
     const [selectedStock, setSelectedStock] = useState("IBM");
     const [open, setOpen] = useState(false);
     const [cookies, setCookie, removeCookie] = useCookies();
@@ -14,7 +15,7 @@ export function AppContextProvider({ children }) {
 
     async function getUserData() {
         try {
-            const { data } = await axios.post(`http://localhost:5000/getUserData`, {
+            const { data } = await axios.post(`${backendUrl}/getUserData`, {
                 userId: userId,
             })
             return (data.data);

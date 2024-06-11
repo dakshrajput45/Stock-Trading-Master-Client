@@ -7,7 +7,8 @@ import axios from "axios";
 import { Error } from "@mui/icons-material";
 
 function SignUp({ setIsLoggedIn }) {
-  const url = "https://project-blend-server.onrender.com";
+  
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: "", email: "", password: "", confirmPassword: ""
@@ -25,7 +26,7 @@ function SignUp({ setIsLoggedIn }) {
   const submitHandler = async(event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(`http://localhost:5000/register`, formData);
+      const { data } = await axios.post(`${backendUrl}/register`, formData);
       if (data.status === "ok") {
         // User registered successfully
         await setCookie("userId", data.data);
