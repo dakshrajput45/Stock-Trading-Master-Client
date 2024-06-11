@@ -18,22 +18,22 @@ function TradeHistory({ userData }) {
             <header className="w-full border-[5px] p-3 uppercase text-center font-bold text-xl mb-5">Trade History</header>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
                 <div className="max-h-[250px] overflow-y-auto">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-400">
                         <thead className="text-xs  uppercase  text-white">
                             <tr>
-                                <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                <th scope="col" className="px-6 py-3 bg-gray-800">
                                     Ticker
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-black">
                                     Actions
                                 </th>
-                                <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                <th scope="col" className="px-6 py-3 bg-gray-800">
                                     Price
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-black">
                                     Quantity
                                 </th>
-                                <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                <th scope="col" className="px-6 py-3 bg-gray-800">
                                     Time
                                 </th>
                                 <th scope="col" className="px-6 py-3  text-black">
@@ -43,9 +43,9 @@ function TradeHistory({ userData }) {
                         </thead>
                         <tbody>
                             {userData.map((rowData, rowIndex) => (
-                                <tr className="border-b border-gray-200 dark:border-gray-700" key={rowIndex}>
+                                <tr className="border-b border-gray-700" key={rowIndex}>
                                     {rowData.map((colData, colIndex) => (
-                                        <td key={colIndex} className={`px-6 py-4 ${colIndex % 2 === 0 ? ' bg-gray-50 dark:bg-gray-800 text-white' : ' text-black'}`}>
+                                        <td key={colIndex} className={`px-6 py-4 ${colIndex % 2 === 0 ? ' bg-gray-800 text-white' : ' text-black'}`}>
                                             {colData}
                                         </td>
                                     ))}

@@ -63,26 +63,26 @@ function StocksList({ stocks }) {
             </header>
             <div className="relative overflow-x-auto shadow-md sm:rounded-md">
                 <div className="max-h-[250px] overflow-y-auto">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-400">
                         <thead className="text-xs uppercase text-white">
                             <tr>
-                                <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                <th scope="col" className="px-6 py-3 bg-gray-800">
                                     Ticker
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-black">
                                     Quantity
                                 </th>
-                                <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                                <th scope="col" className="px-6 py-3 bg-gray-800">
                                     Sell Stock
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             {stocks.map((rowData, rowIndex) => (
-                                <tr className="border-b border-gray-200 dark:border-gray-700" key={rowIndex}>
-                                    <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-white">{rowData.ticker}</td>
+                                <tr className="border-b border-gray-700" key={rowIndex}>
+                                    <td className="px-6 py-4 bg-gray-800 text-white">{rowData.ticker}</td>
                                     <td className="px-6 py-4 text-[black]">{rowData.quantity}</td>
-                                    <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-white cursor-pointer">
+                                    <td className="px-6 py-4 bg-gray-800 text-white cursor-pointer">
                                         <button
                                             onClick={() => openModal(rowData)}
                                         >
